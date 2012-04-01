@@ -3,6 +3,7 @@ require 'stringio'
 require 'fileutils'
 require 'erb'
 require 'tilt'
+require 'digest/sha1'
 
 module Fairytale
   def get url, layout = :"views/layout.erb", &block
@@ -51,6 +52,10 @@ module Fairytale
   def tilt file, params = {}, &block
     template = Tilt.new file.to_s
     template.render(self, params) { block.call }
+  end
+  
+  def digest file
+    Digest::SHA1.hexdigest File.read(file)
   end
 end
 
