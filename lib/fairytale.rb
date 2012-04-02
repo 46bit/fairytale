@@ -50,7 +50,8 @@ module Fairytale
   end
   
   def tilt file, params = {}, &block
-    template = Tilt.new file.to_s
+    engine_options = params[:engine_options].to_a
+    template = Tilt.new file.to_s, nil, engine_options
     template.render(self, params) { block.call }
   end
   
