@@ -29,6 +29,10 @@ module Fairytale
     instance_variables.each { |var_symbol| instance_variable_set var_symbol, nil }
   end
   
+  def before &block
+    block.call
+  end
+  
   def md file, params = {}, &block
     file = "content/#{file.to_s}" if file.class == Symbol
     tilt(file, params, &block)
