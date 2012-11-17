@@ -1,2 +1,28 @@
 #!/usr/bin/env ruby
 
+require "thor"
+require "fileutils"
+
+class Fairytale < Thor
+  desc "new APP_NAME", "Generates new Fairytale app."
+
+  def new name
+    tidy_name = name.downcase.gsub " ", "-"
+    path = File.expand_path name
+
+    if File.exists? path
+      puts "Directory #{name} already exists."
+      exit
+    end
+
+    puts "Created Fairytale app \"#{name}\" successfully!"
+    FileUtils.cp_r "#{fairytale_gem_path}/data/new", path
+  end
+
+  protected
+    def fairytale_gem_path
+      Gem::Specification.find_by_name("fairytale").gem_dir
+    end
+end
+
+Fairytale.start
