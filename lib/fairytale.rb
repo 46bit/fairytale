@@ -5,6 +5,10 @@ require 'fairytale/helpers'
 module Fairytale
   include Fairytale::Helpers
 
+  def path
+    File.expand_path "./"
+  end
+
   def get url, layout = :"views/layout.erb", &block
     @url = url
 

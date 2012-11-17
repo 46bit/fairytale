@@ -1,28 +1,46 @@
 #!/usr/bin/env ruby
 
 require "thor"
+require "json"
 require "fileutils"
 
-class Fairytale < Thor
-  desc "new APP_NAME", "Generates new Fairytale app."
+module Fairytale
+  class Thorytale < Thor
+    attr_accessor :config
 
-  def new name
-    tidy_name = name.downcase.gsub " ", "-"
-    path = File.expand_path name
+    desc "new APP_NAME", "Generates new Fairytale app."
 
-    if File.exists? path
-      puts "Directory #{name} already exists."
-      exit
+    def new name
+      tidy_name = name.downcase.gsub " ", "-"
+      path = File.expand_path name
+
+      if File.exists? path
+        say "Directory #{name} already exists.", :red
+        exit
+      end
+
+      say "Created Fairytale app \"#{name}\" successfully!", :green
+      FileUtils.cp_r "#{fairytale_gem_path}/data/new", path
     end
 
-    puts "Created Fairytale app \"#{name}\" successfully!"
-    FileUtils.cp_r "#{fairytale_gem_path}/data/new", path
+    desc "build", "Compile Fairytale app in current directory."
+
+    def build
+      load_config
+
+      require @config["application_script"].gsub(".rb", "")
+    end
+
+    protected
+      def load_config
+        config_file = File.open("Fairyfile", "r")
+        @config = JSON.parse config_file.read
+      end
+
+      def fairytale_gem_path
+        Gem::Specification.find_by_name("fairytale").gem_dir
+      end
   end
 
-  protected
-    def fairytale_gem_path
-      Gem::Specification.find_by_name("fairytale").gem_dir
-    end
+  Fairytale::Thorytale.start
 end
-
-Fairytale.start
