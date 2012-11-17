@@ -1,5 +1,6 @@
 require "fairytale"
 
 get "/" do
-  erb :index, content: md(:index)
+  @content = md :index
+  erb :index
 end
