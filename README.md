@@ -4,13 +4,13 @@ Fairytale is a Ruby static-site compiler designed to work as closely as possible
 
     # mysite.rb
     require 'fairytale'
-    
+
     get '/' do
       "Hello world!"
     end
 
 Install the gem and run with:
-  
+
     gem install fairytale
     ruby -rubygems mysite.rb
 

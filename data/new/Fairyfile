@@ -1,0 +1,6 @@
+{
+  "application_script": "application.rb",
+  "views_path": "views",
+  "content_path": "content",
+  "public_path": "public"
+}

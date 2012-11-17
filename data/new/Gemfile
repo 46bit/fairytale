@@ -1,0 +1,3 @@
+source :rubygems
+
+gem "fairytale", "~> 1.0.0"
