@@ -9,7 +9,7 @@ module Fairytale
     File.expand_path "./"
   end
 
-  def get url, layout = :"views/layout.erb", &block
+  def get url, layout = "views/layout.erb", &block
     @url = url
 
     print "Building #{url} ... "
