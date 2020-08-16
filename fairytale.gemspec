@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency "thor", "~> 0.16.0"
-  gem.add_dependency "json", "~> 1.7.5"
+  gem.add_dependency "json", ">= 1.7.5", "< 2.4.0"
   gem.add_dependency "tilt", "~> 1.3.3"
   gem.add_dependency "sanitize", "~> 2.0.3"
 end
